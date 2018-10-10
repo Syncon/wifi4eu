@@ -1,0 +1,4 @@
+name = WiFi4EU theme functions
+description = Functions related with the WiFi4EU theme
+core = 7.x
+package = WiFi4EU

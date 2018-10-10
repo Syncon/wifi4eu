@@ -1,0 +1,413 @@
+/*
+Gallery
+
+Gallery component.
+
+Markup: html/gallery.html
+
+Style guide gallery
+*/
+
+.mediagallery {
+  padding-left: 15px;
+  padding-right: 15px;
+
+  .row {
+    padding-left: 0;
+    padding-right: 0;
+
+    &:first-child {
+      .mediagallery__item {
+        padding-top: 0!important;
+      }
+    }
+
+    &:last-child {
+      .mediagallery__item {
+        padding-bottom: 0!important;
+      }
+    }
+  }
+}
+
+.mediagallery__item {
+  // Makes the images 185px.
+  height: auto;
+  padding: 0;
+  overflow: hidden;
+
+  .mediagallery__item_container {
+    width: 100%;
+    height: 100%;
+    margin: 5px 5px 0 5px;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &:first-child {
+    .mediagallery__item_container {
+      margin-left: 0;
+    }
+
+    &.has-icon {
+      .mediagallery__icon {
+        right: 0;
+      }
+    }
+  }
+
+  &:hover {
+    .mediagallery__caption {
+      opacity: 1;
+    }
+  }
+}
+
+.mediagallery__item_info {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  box-sizing: border-box;
+  height: 2.667em;
+}
+
+.mediagallery__caption {
+  font-size: 0.667em;
+  color: #fff;
+  display: block;
+  padding: 5px 10px;
+  height: 4em;
+  opacity: 0;
+  background: $ec-grey;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -ms-transition: opacity 0.3s ease-in-out;
+  -o-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.mediagallery__item.has-icon {
+  .mediagallery__caption {
+    padding-right: 4.5em;
+  }
+
+  .mediagallery__icon {
+    position: absolute;
+    bottom: 0;
+    right: 5px;
+    width: 2.667em;
+    height: 2.667em;
+    padding: 0;
+    background-color: $ec-grey;
+    color: #fff;
+    text-align: center;
+
+    .icon {
+      line-height: 2.667em;
+      font-size: $font-size-medium;
+
+      &::before {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-xs-min) {
+  .mediagallery__item_container {
+    margin-left: 0!important;
+  }
+}
+
+@media (min-width: $screen-xs-min) and (max-width: $screen-xs-max) {
+  .mediagallery__item {
+    float: left;
+    width: 50%;
+  }
+
+  .mediagallery__item:nth-of-type(3) .mediagallery__item_container {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: $screen-sm-max) {
+  .mediagallery {
+    .row {
+      margin-left: -20px;
+    }
+  }
+
+  .mediagallery__item {
+    height: auto;
+  }
+}
+
+/*
+Gallery Overlay
+
+Gallery overlay component.
+
+Markup: html/gallery-overlay.html
+
+Style guide: gallery.overlay
+*/
+
+#gallery-overlay:focus {
+  outline: none;
+}
+
+// Outside container
+.gallery-overlay {
+  width: 100vw;
+  position: relative;
+  color: #fff;
+
+  a {
+    color: #fff;
+  }
+
+  @include breakpoint(screen-md-min) {
+    display: flex;
+    width: 90vw;
+    max-width: 1440px;
+    height: 800px;
+    max-height: 80vh;
+    overflow: hidden;
+  }
+}
+
+// Main container.
+.gallery-overlay__media {
+  display: flex;
+  height: 325px;
+  width: 100%;
+  padding: 0;
+  background-color: #000;
+
+  @include breakpoint(screen-md-min) {
+    width: 70%;
+    height: 100%;
+  }
+
+  .gallery-overlay__media-previous,
+  .gallery-overlay__media-next {
+    display: flex;
+    align-items: center;
+    -ms-flex-align: center;
+    -webkit-align-content: center;
+    justify-content: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    height: 100%;
+    width: 8.333333333%;
+
+    a,
+    i {
+      display: inline-block;
+      font-size: 1.4em;
+
+      &::before {
+        @extend .icon--after;
+
+        margin: 0 !important;
+      }
+    }
+
+    a {
+      cursor: pointer;
+
+      &:hover {
+        color: $ec-grey50;
+        text-decoration: none;
+      }
+    }
+
+    i {
+      color: $ec-grey50;
+    }
+
+    @include breakpoint(screen-md-min) {
+      a,
+      i {
+        font-size: 2.2em;
+      }
+    }
+  }
+
+  // Previous button.
+  .gallery-overlay__media-previous a::before,
+  .gallery-overlay__media-previous i::before {
+    @extend .icon--left;
+  }
+
+  // Next button.
+  .gallery-overlay__media-next a::before,
+  .gallery-overlay__media-next i::before {
+    @extend .icon--right;
+  }
+
+  .gallery-overlay__media-item-list__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 83.33333333%;
+    max-width: 840px;
+    max-height: 100%;
+  }
+
+  ul {
+    width: 100%;
+    max-width: none;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0;
+  }
+
+  .gallery-overlay__media-item {
+    display: none;
+
+    & > * {
+      margin: 0 auto;
+    }
+
+    &.active {
+      display: block;
+
+      img {
+        max-height: 325px;
+
+        @include breakpoint(screen-md-min) {
+          max-height: 80vh;
+        }
+      }
+    }
+  }
+}
+
+.gallery-overlay__close-wrapper {
+  padding: 10px 14px;
+  background-color: $ec-grey;
+  text-align: right;
+
+  @include breakpoint(screen-md-min) {
+    padding: 0 !important;
+    background-color: transparent;
+  }
+}
+
+// Close button.
+.gallery-overlay__close {
+  display: inline-block;
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 4px !important;
+  line-height: normal;
+  background-color: transparent;
+  border-width: 0;
+  color: #fff;
+  z-index: 1;
+
+  @include _focus_outline_border(3px, $ec-yellow, -3px);
+
+  .ui-button-icon-primary {
+    display: inline-block !important;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    margin: 0 !important;
+    text-indent: 0 !important;
+
+    &::after {
+      @extend .icon--after;
+      @extend .icon--close;
+    }
+  }
+
+  .ui-button-text {
+    float: left;
+    padding: 0 !important;
+    text-indent: 0 !important;
+    font-size: $font-size-tiny;
+  }
+
+  @include breakpoint(screen-md-min) {
+    position: absolute !important;
+    top: 25px !important;
+    right: 25px !important;
+  }
+}
+
+// Side bar column.
+.gallery-overlay__sidebar {
+  background-color: $ec-grey;
+
+  @include breakpoint(screen-md-min) {
+    float: left;
+    width: 30%;
+    padding-top: 2em;
+  }
+
+  .gallery-overlay__sidebar__content {
+    padding: 2.575em 2.145em 2.145em 2.145em;
+    line-height: 1.6;
+    font-size: $font-size-xsmall;
+  }
+
+  // Meta info.
+  .gallery-overlay__meta {
+    margin-bottom: 2.575em;
+    line-height: normal;
+    text-align: left;
+    white-space: nowrap;
+
+    > span {
+      margin-right: 15px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  // Number of elements.
+  .gallery-overlay__count {
+    font-weight: $font-weight-bold;
+  }
+
+  // Download button.
+  .gallery-overlay__download a::after {
+    @extend .icon--after;
+    @extend .icon--download;
+  }
+
+  // Share button.
+  .gallery-overlay__share a::after {
+    @extend .icon--after;
+    @extend .icon--share;
+  }
+
+  // Description.
+  .gallery-overlay__description {
+    font-weight: $font-weight-bold;
+    text-align: left;
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Copyright info.
+  .gallery-overlay__copyright {
+    font-size: $font-size-tiny;
+  }
+}
+
+#btn-gallery-overlay:hover {
+  z-index: 2;
+}
