@@ -1,0 +1,11 @@
+name = Page content type
+description = A feature for the page content type
+core = 7.x
+package = WiFi4EU
+dependencies[] = features
+dependencies[] = text
+features[features_api][] = api:2
+features[field_base][] = body
+features[field_instance][] = node-page-body
+features[node][] = page
+project path = sites/all/modules/features
